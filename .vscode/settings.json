@@ -14,8 +14,8 @@
   "editor.copyWithSyntaxHighlighting": false,
   "editor.inlayHints.enabled": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "eslint.autoFixOnSave": true
+    "source.fixAll.eslint": "explicit",
+    "eslint.autoFixOnSave": "explicit"
   },
   // finished
   "[html]": {
