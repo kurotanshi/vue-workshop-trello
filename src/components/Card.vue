@@ -20,7 +20,7 @@ useFocus(target, { initialValue: true });
 const store = useStore();
 const { updateListTitle, openEditTask } = store;
 
-watch(isTitleEditing, (v) => {
+watch(isTitleEditing, () => {
   updateListTitle(props.id, title.value);
 });
 </script>
