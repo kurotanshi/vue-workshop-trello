@@ -1,6 +1,6 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
+// eslint-disable-next-line no-unused-vars
 const defaultList = [
   {
     id: "61bblwnux0tlb1vp3qk",
