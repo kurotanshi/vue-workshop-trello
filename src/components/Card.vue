@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import { useFocus } from "@vueuse/core";
 import { vOnClickOutside } from "@vueuse/components";
 import { useStore } from "/src/stores";
@@ -19,6 +19,18 @@ useFocus(target, { initialValue: true });
 
 const store = useStore();
 const { updateListTitle, openEditTask } = store;
+
+// 建立一個 computed 來處理 tasks 的雙向綁定
+const localTasks = computed({
+  get: () => props.tasks,
+  set: (value) => {
+    // 找到對應的 list 並更新其 tasks
+    const list = store.lists.find(l => l.id === props.id);
+    if (list) {
+      list.tasks = value;
+    }
+  }
+});
 
 watch(isTitleEditing, () => {
   updateListTitle(props.id, title.value);
@@ -54,7 +66,7 @@ watch(isTitleEditing, () => {
       v-bind="task"
     /> -->
 
-    <draggable :list="tasks" group="task" itemKey="id" ghost-class="opacity-30">
+    <draggable v-model="localTasks" group="task" itemKey="id" ghost-class="opacity-30">
       <template #item="{ element }">
         <TaskItem
           @click="openEditTask(props.id, element.id)"

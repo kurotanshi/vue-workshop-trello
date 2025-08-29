@@ -1,13 +1,19 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import { useStore } from "/src/stores";
 
 const store = useStore();
 const currentEditTask = computed(() => store.currentEditTask);
 const { updateTask, closeEditTask, deleteTask } = store;
 
-const title = ref(currentEditTask.value.title);
-const content = ref(currentEditTask.value.content);
+const title = ref("");
+const content = ref("");
+
+// 當 currentEditTask 更新時，同步更新 title 和 content
+watchEffect(() => {
+  title.value = currentEditTask.value.title || "";
+  content.value = currentEditTask.value.content || "";
+});
 </script>
 
 <template>

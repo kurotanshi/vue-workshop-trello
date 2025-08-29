@@ -4,7 +4,13 @@ import { useStore } from "/src/stores";
 import draggable from "vuedraggable";
 
 const store = useStore();
-const list = computed(() => store.lists);
+const list = computed({
+  get: () => store.lists,
+  set: (value) => {
+    // 當拖放改變順序時，直接更新 store 的 lists
+    store.lists = value;
+  }
+});
 </script>
 
 <template>
@@ -13,7 +19,7 @@ const list = computed(() => store.lists);
   >
     <div id="board-wrapper" class="h-full w-full p-4 block overflow-auto">
       <draggable
-        :list="list"
+        v-model="list"
         group="card"
         itemKey="id"
         ghost-class="opacity-30"

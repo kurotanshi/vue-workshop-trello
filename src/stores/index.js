@@ -113,6 +113,20 @@ export const useStore = defineStore("store", () => {
     });
   };
 
+  // 更新列表順序（拖放卡片後）
+  const updateListOrder = () => {
+    // vuedraggable 會自動更新 lists 陣列順序
+    // 這裡只需要觸發 watch 來儲存到 localStorage
+    // watch 已經設定 deep: true，會自動偵測到變化
+  };
+
+  // 更新任務順序（拖放任務後）
+  const updateTaskOrder = (cardId) => {
+    // vuedraggable 會自動更新 tasks 陣列順序
+    // 這裡只需要觸發 watch 來儲存到 localStorage
+    // watch 已經設定 deep: true，會自動偵測到變化
+  };
+
   // 為 lists 加入 watch 監聽
   watch(
     lists,
@@ -133,5 +147,7 @@ export const useStore = defineStore("store", () => {
     addTask,
     deleteTask,
     addNewCard,
+    updateListOrder,
+    updateTaskOrder,
   };
 });
